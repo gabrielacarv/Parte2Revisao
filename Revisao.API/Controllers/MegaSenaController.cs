@@ -6,17 +6,24 @@ namespace Revisao.API.Controllers
 {
 	[ApiController]
 	[Route("[controller]")]
-	public class RegistroJogosController : ControllerBase
+	public class MegaSenaController : ControllerBase
 	{
-		private readonly IRegistroJogoService _registroJogoService;
+		private readonly IJogoService _registroJogoService;
 
-		public RegistroJogosController(IRegistroJogoService registroJogoService)
+		public MegaSenaController(IJogoService registroJogoService)
 		{
             _registroJogoService = registroJogoService;
 		}
 
-		[HttpPost]
-		public IActionResult Post(RegistroJogoViewModel model)
+        [HttpGet("ObterTodosOsJogos")]
+        public async Task<IActionResult> Get()
+        {
+            var jogos = await _registroJogoService.ObterTodos();
+            return Ok(jogos);
+        }
+
+        [HttpPost("RegistrarJogo")]
+		public IActionResult Post(NovoMegaSenaViewModel model)
 		{
 			bool Valido = _registroJogoService.Adicionar(model);	
 			if (Valido)

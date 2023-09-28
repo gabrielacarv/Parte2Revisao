@@ -8,9 +8,7 @@ namespace Revisao.Application.AutoMapper
     {
         public DomainToApplication() 
         {
-            CreateMap<Jogo, RegistroJogoViewModel>();
-
-            CreateMap<Jogo, ObterTodosOsJogosViewModel>();
+            CreateMap<Jogo, MegaSenaViewModel>();
         }
     }
 }

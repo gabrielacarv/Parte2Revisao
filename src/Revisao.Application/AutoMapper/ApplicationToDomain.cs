@@ -8,10 +8,10 @@ namespace Revisao.Application.AutoMapper
     {
         public ApplicationToDomain() 
         {
-            CreateMap<RegistroJogoViewModel, Jogo>()
-                .ConstructUsing(q => new Jogo(q.Nome, q.Cpf, q.PrimeiroNro, q.SegundoNro, q.TerceiroNro, q.QuartoNro, q.QuintoNro, q.SextoNro, DateTime.Now));
+            CreateMap<MegaSenaViewModel, Jogo>();
 
-            CreateMap<ObterTodosOsJogosViewModel, Jogo>();
+            CreateMap<NovoMegaSenaViewModel, Jogo>()
+                .ConstructUsing(q => new Jogo(q.Nome, q.Cpf, q.PrimeiroNro, q.SegundoNro, q.TerceiroNro, q.QuartoNro, q.QuintoNro, q.SextoNro, DateTime.Now));
         }
     }
 }

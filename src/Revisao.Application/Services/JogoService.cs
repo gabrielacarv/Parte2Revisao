@@ -6,13 +6,13 @@ using Revisao.Domain.Interfaces;
 
 namespace Revisao.Application.Services
 {
-    public class RegistroJogoService : IRegistroJogoService
+    public class JogoService : IJogoService
     {
         #region Construtores
-        private readonly IRegistroJogoRepository _registroJogoRepository;
+        private readonly IJogoRepository _registroJogoRepository;
         private IMapper _mapper;
 
-        public RegistroJogoService(IRegistroJogoRepository registroJogoRepository, IMapper mapper)
+        public JogoService(IJogoRepository registroJogoRepository, IMapper mapper)
         {
             _registroJogoRepository = registroJogoRepository;
             _mapper = mapper;
@@ -20,9 +20,9 @@ namespace Revisao.Application.Services
         #endregion
 
 
-        public bool Adicionar(RegistroJogoViewModel registroJogoViewModel)
+        public bool Adicionar(NovoMegaSenaViewModel novoMegaSenaViewModel)
         {
-            List<int> Numeros = new List<int>() {registroJogoViewModel.PrimeiroNro, registroJogoViewModel.SegundoNro, registroJogoViewModel.TerceiroNro, registroJogoViewModel.QuartoNro, registroJogoViewModel.QuintoNro, registroJogoViewModel.SextoNro};
+            List<int> Numeros = new List<int>() { novoMegaSenaViewModel.PrimeiroNro, novoMegaSenaViewModel.SegundoNro, novoMegaSenaViewModel.TerceiroNro, novoMegaSenaViewModel.QuartoNro, novoMegaSenaViewModel.QuintoNro, novoMegaSenaViewModel.SextoNro};
 
             if (!ValidarNumerosDiferentes(Numeros))
             {
@@ -42,9 +42,15 @@ namespace Revisao.Application.Services
                 }
                 return true;
             }
-            var novoJogo = _mapper.Map<Jogo>(registroJogoViewModel);         
+            var novoJogo = _mapper.Map<Jogo>(novoMegaSenaViewModel);         
             _registroJogoRepository.Adicionar(novoJogo);
             return true;
+        }
+
+        public async Task<IEnumerable<MegaSenaViewModel>> ObterTodos()
+        {
+            var jogos = await _registroJogoRepository.ObterTodos();
+            return _mapper.Map<IEnumerable<MegaSenaViewModel>>(jogos);
         }
     }
 }

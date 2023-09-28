@@ -1,9 +1,15 @@
 ﻿using Revisao.Application.Validação;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace Revisao.Application.ViewModels
 {
-    public class RegistroJogoViewModel
+    public class NovoMegaSenaViewModel
     {
         [Required(ErrorMessage = "Nome é obrigatório!")]
         [StringLength(255, MinimumLength = 3, ErrorMessage = "O nome deve ter no mínimo 3 caracteres e máximo de 255 caracteres!")]
@@ -35,6 +41,7 @@ namespace Revisao.Application.ViewModels
         [Required(ErrorMessage = "Sexto número é obrigatório!")]
         [Range(1, 60, ErrorMessage = "O sexto número deve estar entre 1 e 60!")]
         public int SextoNro { get; set; }
-        // public DateTime DataJogo { get;  private set; }
+
+        //public DateTime DataJogo { get;  private set; }
     }
 }

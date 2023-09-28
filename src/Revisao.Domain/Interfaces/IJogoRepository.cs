@@ -2,8 +2,9 @@
 
 namespace Revisao.Domain.Interfaces
 {
-    public interface IRegistroJogoRepository
+    public interface IJogoRepository
     {
         void Adicionar(Jogo jogo);
+        Task<IEnumerable<Jogo>> ObterTodos();
     }
 }
